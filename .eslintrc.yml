@@ -1,0 +1,16 @@
+parserOptions:
+  ecmaVersion: 2018
+env:
+  es6: true
+  node: true
+plugins:
+  - security
+extends:
+  - eslint:recommended
+  - plugin:security/recommended
+rules:
+  no-console: 0
+  no-var: error
+  no-unused-vars:
+    - error
+    - args: none

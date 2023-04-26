@@ -1,15 +1,20 @@
 const express = require('express');
-const logger = require('./utils/logger');
-const env = require('dotenv').config();
+const loggerFunct = require('./utils/logger_config')
+const corsConfig = require('./utils/cors_config')
+const { config } = require('dotenv')
 const cors = require('cors');
 const connectDB = require('./database/mongo.config');
 const errorHandler = require('./middlewares/error.handler');
-const indexRouter = require('./modules/index.route');
+const indexRouter = require('./modules/index.routes');
+const helmet = require('helmet');
+const limiter = require('./utils/rate_limiter');
+config()
 
 const app = express();
 
-const corsOptions = { origin: `http://localhost:3000` };
-app.use(cors(corsOptions));
+app.use(helmet());
+app.use(cors(corsConfig));
+app.use(limiter)
 
 connectDB();
 
@@ -17,12 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  logger.info(`Request: ${req.method} ${req.url}`);
-
-  res.on('finish', () => {
-    logger.info(`Response: status code : ${res.statusCode}`);
-  });
-
+  loggerFunct(req, res)
   next();
 });
 
@@ -32,5 +32,5 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 4000;
 app.listen( port, () => {
-  logger.info(`app (${process.env.NODE_ENV}) is running on http://localhost:${port}`)
+  console.log(`app (${process.env.NODE_ENV}) is running on http://localhost:${port}`)
 });

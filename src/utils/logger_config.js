@@ -19,4 +19,12 @@ const logger = createLogger({
   silent: process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development',
 });
 
-module.exports = logger;
+const loggerFunct = (req, res) => {
+  logger.info(`Request: ${req.method} ${req.url}`);
+
+  res.on('finish', () => {
+    logger.info(`Response: status code : ${res.statusCode}`);
+  });
+}
+
+module.exports = loggerFunct;

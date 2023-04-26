@@ -20,12 +20,15 @@ yarn start: This command will start the production server.<br />
 
 ## Description
 
-This is a simple Backend Task Manager built with ExpressJs & MongoDB<br />
+This is a simple Backend Onlineshop built with ExpressJs & MongoDB<br />
 
 This backend project includes the following features:<br />
 
-1. Create Task. <br />
-2. Read Task. <br />
-3. Update Task.<br />
-4. Delete Task.<br />
-5. Read all Tasks.<br />
+1. Register. <br />
+2. Login. <br />
+3. Create Product (Handphone). <br />
+4. Read Product (Handphone). <br />
+5. Update Product (Handphone).<br />
+6. Delete Product (Handphone).<br />
+7. Read all Products (Handphone).<br />
+8. Create Order. <br />
