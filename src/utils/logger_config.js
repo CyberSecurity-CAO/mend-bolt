@@ -1,4 +1,5 @@
 const { createLogger, transports, format } = require('winston');
+const chalk = require('chalk');
 
 const customFormat = format.combine(
   format.timestamp(),
@@ -23,7 +24,11 @@ const loggerFunct = (req, res) => {
   logger.info(`Request: ${req.method} ${req.url}`);
 
   res.on('finish', () => {
-    logger.info(`Response: status code : ${res.statusCode}`);
+    if(res.statusCode === 200 || res.statusCode === 201 ){
+      logger.info(chalk.green(`Response: status code : ${res.statusCode}`));
+    }else{
+      logger.info(chalk.red(`Response: status code : ${res.statusCode}`));
+    }
   });
 }
 
