@@ -25,6 +25,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "gulp-imagemin": "~5.0.0",
     "nodemon": "^2.0.21"
   }
 }
